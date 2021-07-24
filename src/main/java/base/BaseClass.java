@@ -1,8 +1,53 @@
 package base;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
-	WebDriver driver;
+	protected static WebDriver driver;
+	Properties prop;
+	public static Logger log=LogManager.getLogger(BaseClass.class.getName());
 	
+	public BaseClass() {
+		// TODO Auto-generated constructor stub
+		BasicConfigurator.configure();
+		log.info("##### Inside Constructor of "+BaseClass.class.getName()+" Class #####");
+		try {
+			///Users/mohitrajupardeshi/eclipse-workspace/LeetCode
+			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"/src/main/java/config/Config.properties");
+			prop= new Properties();
+			prop.load(fis);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void init() {
+	//	log.info("##### Inside Method "+this.getClass().getEnclosingMethod().getName()+" Method #####");
+		WebDriverManager.chromedriver().setup();
+		driver= new ChromeDriver();
+		driver.get(prop.getProperty("URL"));
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		
+	}
+
 }
