@@ -2,8 +2,11 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import base.BaseClass;
 import pages.LoginPage;
@@ -16,40 +19,57 @@ public class LoginTest extends BaseClass {
 		super();
 	}
 
-	@BeforeMethod
-	public void setUp() {
+	@BeforeTest
+	public void testSetUp() {
 		init();
+
+	}
+
+	@BeforeMethod
+	public void methodSetUp() {
+
 		loginPage = new LoginPage(driver);
 	}
 
 	@Test
 	public void loginTitleTest() {
-		System.out.println(driver.getTitle());
+		Assert.assertEquals(driver.getTitle(), pageTitleProperties.getProperty("LoginPage"));
 	}
 
 	@Test
+	public void clickMenu() {
+		// Home Menu
+		SoftAssert softAssert = new SoftAssert();
+		loginPage.getHome().click();
+		softAssert.assertEquals(driver.getTitle(), pageTitleProperties.getProperty("LoginPage"));
+
+		softAssert.assertAll();
+	}
+
+	@Test(enabled = false)
 	public void failTest() {
 		// System.out.println(driver.getTitle());
-		try
-		{
-		Assert.assertFalse(true);
-		}
-		catch(Exception e)
-		{
+		try {
+			Assert.assertFalse(true);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			System.out.println("Hello World");
 		}
 	}
 
-	@Test(dependsOnMethods  = "failTest")
+	@Test(dependsOnMethods = "failTest", enabled = false)
 	public void skippedTest() {
 		System.out.println(driver.getTitle());
 	}
 
 	@AfterMethod
-	public void tearDown() {
+	public void methodTearDown() {
+		// driver.quit();
+	}
+
+	@AfterTest
+	public void testTearDown() {
 		driver.quit();
 	}
 }
