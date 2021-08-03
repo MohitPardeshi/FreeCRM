@@ -8,9 +8,12 @@
     <classes>
       <class name="testCases.LoginTest">
         <methods>
+          <include name="testTearDown"/>
+          <include name="methodTearDown"/>
           <include name="skippedTest"/>
-          <include name="tearDown"/>
-          <include name="setUp"/>
+          <include name="testSetUp"/>
+          <include name="methodSetUp"/>
+          <include name="clickMenu"/>
           <include name="failTest"/>
         </methods>
       </class> <!-- testCases.LoginTest -->

@@ -48,21 +48,8 @@ public class BaseClass {
 		// "+this.getClass().getEnclosingMethod().getName()+" Method #####");
 
 		// As per the string given the browser will be invoked
-
-		String browserName = "";
-
-		switch (browserName) {
-		case "Chrome":
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-			break;
-		case "Safari":
-			//WebDriverManager.sa
-			break;
-		default:
-
-		}
-
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
 		driver.get(prop.getProperty("URL"));
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);

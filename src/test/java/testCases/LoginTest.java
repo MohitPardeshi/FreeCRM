@@ -31,12 +31,12 @@ public class LoginTest extends BaseClass {
 		loginPage = new LoginPage(driver);
 	}
 
-	@Test
+	@Test(description = "To verify whether page title is correct")
 	public void loginTitleTest() {
 		Assert.assertEquals(driver.getTitle(), pageTitleProperties.getProperty("LoginPage"));
 	}
 
-	@Test
+	@Test(description="To verify whether click button is clickable")
 	public void clickMenu() {
 		// Home Menu
 		SoftAssert softAssert = new SoftAssert();
@@ -46,7 +46,7 @@ public class LoginTest extends BaseClass {
 		softAssert.assertAll();
 	}
 
-	@Test(enabled = false)
+	@Test(description="Fail test" ,enabled = true)
 	public void failTest() {
 		// System.out.println(driver.getTitle());
 		try {
@@ -58,7 +58,7 @@ public class LoginTest extends BaseClass {
 		}
 	}
 
-	@Test(dependsOnMethods = "failTest", enabled = false)
+	@Test(description="Skip test",dependsOnMethods = "failTest", enabled = true)
 	public void skippedTest() {
 		System.out.println(driver.getTitle());
 	}

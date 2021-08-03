@@ -7,9 +7,10 @@
         <methods>
           <include name="testTearDown"/>
           <include name="methodTearDown"/>
+          <include name="skippedTest"/>
           <include name="testSetUp"/>
           <include name="methodSetUp"/>
-          <include name="loginTitleTest"/>
+          <include name="failTest"/>
         </methods>
       </class> <!-- testCases.LoginTest -->
     </classes>

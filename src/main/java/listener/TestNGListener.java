@@ -20,7 +20,7 @@ public class TestNGListener  extends BaseClass implements ITestListener{
 	@Override
 	public void onTestStart(ITestResult result) {
 		//Initializing the Test
-		test=extent.createTest(result.getMethod().getMethodName());
+		test=extent.createTest(result.getMethod().getDescription());
 		extentTestThread.set(test); //For parallel test execution
 		
 	}
@@ -29,8 +29,8 @@ public class TestNGListener  extends BaseClass implements ITestListener{
 	public void onTestSuccess(ITestResult result) {
 		// TODO Auto-generated method stub
 	//	test.log(Status.PASS, result.getMethod().getMethodName() + " is successfully Passed");
-		extentTestThread.get().log(Status.PASS, result.getMethod().getMethodName() + " is successfully Passed");
-		System.out.println(result.getMethod().getMethodName() + " is successfully Passed");
+		extentTestThread.get().log(Status.PASS, result.getMethod().getDescription() + " is successfully Passed");
+		System.out.println(result.getMethod().getDescription() + " is successfully Passed");
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class TestNGListener  extends BaseClass implements ITestListener{
 	public void onTestSkipped(ITestResult result) {
 		// Test Case is skipped
 		//test.log(Status.SKIP, result.getMethod().getMethodName() + " is Skipped");
-		extentTestThread.get().log(Status.SKIP, result.getMethod().getMethodName() + " is is Skipped");
-		System.out.println(result.getMethod().getMethodName() + " is Skipped");
+		extentTestThread.get().log(Status.SKIP, result.getMethod().getDescription() + " is is Skipped");
+		System.out.println(result.getMethod().getDescription() + " is Skipped");
 		
 	}
 
@@ -56,7 +56,7 @@ public class TestNGListener  extends BaseClass implements ITestListener{
 
 	}
 
-	@Override
+	@Override	
 	public void onTestFailedWithTimeout(ITestResult result) {
 		// TODO Auto-generated method stub
 
